@@ -10,21 +10,14 @@ var client = twilio(config.get('TWILIO_ACCOUNT_SID'),
 var app = express();
 var port = 3000;
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true}));
+
+require('./routes')(app);
+
 nunjucks.configure('views', {
 	autoescape: true,
 	express: app
-});
-
-app.get('/', function(req, res) {
-	res.render('index.html', {
-		name: 'Andy'
-	});
-});
-
-app.post('/', function(req, res) {
-	var response = new twilio.TwimlResponse();
-	response.sms('Hello from Twilio');
-	res.send(response.toString());
 });
 
 app.listen(port);
