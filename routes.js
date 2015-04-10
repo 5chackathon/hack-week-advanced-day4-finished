@@ -64,6 +64,11 @@ app.get('/login', function(req, res) {
         res.render('login.html');
 });
 
+app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+});
+
 app.get('/ryan', function(req, res) {
         res.render('index.html', {
                 name: 'Ryan' 
